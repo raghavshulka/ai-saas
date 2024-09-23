@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.subscription.createMany({
     data: [
-      { id: 'free', credits: 0, price: 0, limit: 10 },
-      { id: 'basic', credits: 100, price: 9.99, limit: 100 },
-      { id: 'premium', credits: 1000, price: 19.99, limit: 1000 },
+      { userId: 'free', credits: 0, price: 0, limit: 10 },
+      { userId: 'basic', credits: 100, price: 9.99, limit: 100 },
+      { userId: 'premium', credits: 1000, price: 19.99, limit: 1000 },
     ],
   });
 }
