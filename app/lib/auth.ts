@@ -1,4 +1,25 @@
 import GoogleProvider from "next-auth/providers/google";
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
+
+export const hashPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+};
+
+export const comparePassword = (password: string, hashedPassword: string) => {
+  return bcrypt.compare(password, hashedPassword);
+};
+
+export const generateToken = (userId: string) => {
+  return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: '1h' });
+};
+
+export const verifyToken = (token: any) => {
+  return jwt.verify(token, JWT_SECRET);
+};
 
 export const NEXT_AUTH_CONFIG = {
   providers: [
