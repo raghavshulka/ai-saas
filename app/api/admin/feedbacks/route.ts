@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ feedbacks });
   } catch (error) {
+    console.error('Error fetching feedbacks:', error);
     return NextResponse.json({ error: 'Error fetching feedbacks' }, { status: 500 });
   }
 }

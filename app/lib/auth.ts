@@ -1,4 +1,5 @@
-import GoogleProvider from "next-auth/providers/google";
+import { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
@@ -17,42 +18,42 @@ export const generateToken = (userId: string) => {
   return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: '1h' });
 };
 
-export const verifyToken = (token: any): JwtPayload | null => {
-  // Verifying the JWT token
-  const decoded = jwt.verify(token, JWT_SECRET);
-
-  // Ensure decoded is a JwtPayload object and not a string
-  if (typeof decoded === 'object' && decoded !== null && 'id' in decoded) {
-    return decoded as JwtPayload; // Explicitly cast to JwtPayload
+export const verifyToken = (token: string): JwtPayload | null => {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    return decoded;
+  } catch {
+    return null;
   }
-
-  return null;
 };
 
-export const NEXT_AUTH_CONFIG = {
+export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  
-  // Ensure the secret is placed at the top level
   secret: process.env.NEXTAUTH_SECRET,
-
   callbacks: {
-    // JWT Callback to add user information to token
-    jwt: async ({ user, token }: { user?: any; token: any }) => {
+    jwt: async ({ user, token }) => {
       if (user) {
-        token.uid = user.id;  // Add user ID to token
+        return {
+          ...token,
+          uid: user.id,
+        };
       }
       return token;
     },
-    
-    // Session callback to expose token data in the session
-    session: ({ session, token }: { session: any; token: any }) => {
+    session: async ({ session, token }) => {
       if (session.user) {
-        session.user.id = token.uid;  // Add token uid to session user
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.uid,
+          },
+        };
       }
       return session;
     },

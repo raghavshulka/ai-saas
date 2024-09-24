@@ -1,3 +1,4 @@
+// Header.tsx
 import React, { useEffect } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import {
@@ -30,7 +31,7 @@ export const Header = () => {
       style={{
         backgroundImage,
       }}
-      className="relative flex min-h-screen flex-col justify-center items-center overflow-hidden bg-gray-950 px-4 py-12 text-gray-200"
+      className="relative flex min-h-screen flex-col justify-center items-center bg-gray-950 px-4 py-12 text-gray-200"
     >
       <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto">
         <span className="mb-3 inline-block rounded-full bg-[#0d0d23] px-3 py-1.5 text-sm font-medium">

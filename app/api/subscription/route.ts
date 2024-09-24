@@ -14,7 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const decoded: any = verifyToken(token);
+    const decoded = verifyToken(token);
+
+    if (!decoded) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
 
     const user = await prisma.user.findUnique({
       where: { id: decoded.id },
@@ -39,12 +43,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await prisma.user.update({
       where: { id: user.id },
-      data: { subscription: { connect: { id: subscription.id } } },
+      data: { subscriptionId: subscription.id },
     });
 
     return res.status(200).json({ message: 'Subscription updated' });
-
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 }

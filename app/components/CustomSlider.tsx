@@ -93,7 +93,7 @@ const Component: React.FC = () => {
   }, [selectedOption])
 
   return (
-    <div className="min-h-screen pt-44 pb-44 bg-[#0d0d23] flex items-center justify-center">
+    <div className="min-h-screen pt-44 pb-44 flex items-center justify-center">
       <div className="w-full md:max-w-4xl max-w-sm md:aspect-video aspect-square md:rounded-lg overflow-hidden flex flex-col md:flex-row border border-gray-700">
         {/* Sidebar */}
         <div className="w-full md:w-1/4 bg-black p-2 space-y-2 flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto border-r border-gray-700">

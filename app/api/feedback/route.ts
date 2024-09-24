@@ -1,3 +1,5 @@
+// app/api/feedback/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/app/lib/prisma';
 import { verifyToken } from '@/app/lib/auth';
@@ -38,6 +40,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: 'Feedback submitted successfully!' });
   } catch (error) {
+    console.error('Error submitting feedback:', error);
     return NextResponse.json({ error: 'Error submitting feedback' }, { status: 500 });
   }
 }
