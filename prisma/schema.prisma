@@ -18,18 +18,18 @@ model User {
   credits      Int          @default(0)
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
-  subscription Subscription?
+  subscription Subscription?  @relation(fields: [subscriptionId], references: [id])
   subscriptionId String?       // Foreign key reference to the Subscription model
   feedbacks      Feedback[]    // One-to-many relation to Feedback model
 }
 
 model Subscription {
   id      String  @id @default(uuid()) @map("_id")
+  name    String  @unique
   credits Int
   price   Float
   limit   Int
-  user    User    @relation(fields: [userId], references: [id])
-  userId  String  @unique
+  users User[]
 }
 
 model Feedback {

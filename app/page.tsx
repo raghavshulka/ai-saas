@@ -5,6 +5,7 @@ import PricingComponent from "./components/Pricing";
 import Generate2 from "./components/Genrate2";
 import CustomSlider from "./components/CustomSlider";
 import { Header } from "./components/Header";
+import AdminDashboard from "./admin/users/page";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Generate1 />
       <Generate2 />
       <PricingComponent />
+      <AdminDashboard/>
     </div>
   );
 }
