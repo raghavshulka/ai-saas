@@ -1,5 +1,5 @@
 // app/admin/feedbacks/page.tsx
-
+'use client'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
@@ -30,11 +30,11 @@ const AdminFeedbacksPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className=' text-white bg-white'>
       <Typography variant="h4">User Feedback</Typography>
       <Table>
         <TableHead>
-          <TableRow>
+          <TableRow >
             <TableCell>User Email</TableCell>
             <TableCell>Feedback Content</TableCell>
           </TableRow>
