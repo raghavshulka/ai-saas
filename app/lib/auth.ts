@@ -1,5 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
@@ -17,8 +17,16 @@ export const generateToken = (userId: string) => {
   return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: '1h' });
 };
 
-export const verifyToken = (token: any) => {
-  return jwt.verify(token, JWT_SECRET);
+export const verifyToken = (token: any): JwtPayload | null => {
+  // Verifying the JWT token
+  const decoded = jwt.verify(token, JWT_SECRET);
+
+  // Ensure decoded is a JwtPayload object and not a string
+  if (typeof decoded === 'object' && decoded !== null && 'id' in decoded) {
+    return decoded as JwtPayload; // Explicitly cast to JwtPayload
+  }
+
+  return null;
 };
 
 export const NEXT_AUTH_CONFIG = {

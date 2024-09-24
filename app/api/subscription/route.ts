@@ -24,6 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ message: 'User not found' });
     }
 
+    // Check if user already has a subscription
+    if (user.subscriptionId) {
+      return res.status(400).json({ message: 'User already has a subscription' });
+    }
+
     const subscription = await prisma.subscription.findUnique({
       where: { id: subscriptionId },
     });
