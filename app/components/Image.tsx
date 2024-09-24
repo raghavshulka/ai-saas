@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 
-export default function Home() {
+export default function Image() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string | null>(null);
