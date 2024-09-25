@@ -66,6 +66,7 @@ export default function ImageGeneration() {
             <input
               type="text"
               value={negative_prompt}
+              readOnly
               className="w-full p-4 bg-gray-800 border border-gray-700 rounded-xl"
             />
           </div>
