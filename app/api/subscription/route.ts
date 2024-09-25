@@ -1,23 +1,36 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from '@/app/lib/auth';
 import prisma from '@/app/lib/prisma';
 
-export  async function POST(req: NextApiRequest, res: NextApiResponse) {
+interface DecodedToken {
+  id: string;
+  [key: string]: any; // Adjust based on what your token contains
+}
+
+export async function POST(req: NextRequest, res: NextResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+    return new NextResponse(JSON.stringify({ message: 'Method Not Allowed' }), { status: 405 });
   }
 
-  const { token, subscriptionId } = req.body;
+  // Type for request body
+  let body: { token: string; subscriptionId: string };
+  try {
+    body = await req.json();
+  } catch (error) {
+    return new NextResponse(JSON.stringify({ message: 'Invalid JSON' }), { status: 400 });
+  }
+
+  const { token, subscriptionId } = body;
 
   if (!token || !subscriptionId) {
-    return res.status(400).json({ message: 'Missing required fields' });
+    return new NextResponse(JSON.stringify({ message: 'Missing required fields' }), { status: 400 });
   }
 
   try {
-    const decoded = verifyToken(token);
+    const decoded = verifyToken(token) as DecodedToken | null;
 
     if (!decoded) {
-      return res.status(401).json({ message: 'Invalid token' });
+      return new NextResponse(JSON.stringify({ message: 'Invalid token' }), { status: 401 });
     }
 
     const user = await prisma.user.findUnique({
@@ -25,12 +38,12 @@ export  async function POST(req: NextApiRequest, res: NextApiResponse) {
     });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return new NextResponse(JSON.stringify({ message: 'User not found' }), { status: 404 });
     }
 
     // Check if user already has a subscription
     if (user.subscriptionId) {
-      return res.status(400).json({ message: 'User already has a subscription' });
+      return new NextResponse(JSON.stringify({ message: 'User already has a subscription' }), { status: 400 });
     }
 
     const subscription = await prisma.subscription.findUnique({
@@ -38,7 +51,7 @@ export  async function POST(req: NextApiRequest, res: NextApiResponse) {
     });
 
     if (!subscription) {
-      return res.status(404).json({ message: 'Subscription not found' });
+      return new NextResponse(JSON.stringify({ message: 'Subscription not found' }), { status: 404 });
     }
 
     await prisma.user.update({
@@ -46,9 +59,9 @@ export  async function POST(req: NextApiRequest, res: NextApiResponse) {
       data: { subscriptionId: subscription.id },
     });
 
-    return res.status(200).json({ message: 'Subscription updated' });
+    return new NextResponse(JSON.stringify({ message: 'Subscription updated' }), { status: 200 });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return new NextResponse(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
   }
 }
