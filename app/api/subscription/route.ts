@@ -4,7 +4,7 @@ import prisma from '@/app/lib/prisma';
 
 interface DecodedToken {
   id: string;
-  [key: string]: any; // Adjust based on what your token contains
+  [key: string]: string; // Adjust based on what your token contains
 }
 
 export async function POST(req: NextRequest) {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch (error) {
-    return NextResponse.json({ message: 'Invalid JSON' }, { status: 400 });
+    return NextResponse.json({ error }, { status: 400 });
   }
 
   const { token, subscriptionId } = body;
@@ -58,6 +58,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Subscription updated' }, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 }
