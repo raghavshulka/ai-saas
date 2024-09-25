@@ -12,10 +12,10 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Subscription" (
     "_id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "credits" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "limit" INTEGER NOT NULL,
-    "userId" TEXT NOT NULL,
 
     CONSTRAINT "Subscription_pkey" PRIMARY KEY ("_id")
 );
@@ -31,10 +31,10 @@ CREATE TABLE "Feedback" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Subscription_userId_key" ON "Subscription"("userId");
+CREATE UNIQUE INDEX "Subscription_name_key" ON "Subscription"("name");
 
 -- AddForeignKey
-ALTER TABLE "Subscription" ADD CONSTRAINT "Subscription_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_subscriptionId_fkey" FOREIGN KEY ("subscriptionId") REFERENCES "Subscription"("_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Feedback" ADD CONSTRAINT "Feedback_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("_id") ON DELETE RESTRICT ON UPDATE CASCADE;
