@@ -7,7 +7,7 @@ import PricingComponent from "../components/Pricing"
 
 const Home = () => {
   return (
-    <div className="bg-[#0d0d23] text-white">
+    <div className="bg-[#0d0e11] text-white">
       <Header />
       <div className="bg-gradient-to-br from-[#0d0d23] to-[#0e0e3f] py-12">
         <CustomSlider />

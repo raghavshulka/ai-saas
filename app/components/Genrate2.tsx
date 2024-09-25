@@ -4,7 +4,7 @@ export default function AIImageGeneratorLanding() {
     return (
       <div className="min-h-screen text-white flex items-center justify-center p-4 md:p-8 lg:p-12">
         <div
-          className={`max-w-7xl mx-auto flex flex-col items-center justify-between lg:flex-row lg:${style}`}
+          className={`max-w-7xl mx-auto flex flex-col items-center justify-between   lg:${style}`}
         >
           {/* Text Section */}
           <div className="lg:w-1/2 mb-8 lg:mb-0 text-center lg:text-left">
@@ -60,8 +60,8 @@ export default function AIImageGeneratorLanding() {
 
   return (
     <>
-      <Cmp style="flex-row" />
       <Cmp style="flex-row-reverse" />
+      <Cmp style="flex-row" />
     </>
   );
 }

@@ -39,7 +39,7 @@ const sampleImages = [
 ];
 
 export default function Generate1() {
-  const [generatedImage, setGeneratedImage] = useState(
+  const [generatedImage ] = useState(
     "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60"
   );
 
