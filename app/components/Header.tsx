@@ -1,5 +1,4 @@
-// Header.tsx
-import React, { useEffect } from "react";
+'use client'
 import { FiArrowRight } from "react-icons/fi";
 import {
   useMotionTemplate,
