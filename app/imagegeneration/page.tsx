@@ -1,14 +1,19 @@
 // pages/index.tsx
 "use client";
 import { useState } from "react";
+import { string } from "zod";
 
+interface typ {
+  value: string;
+  label: string;
+}
 export default function Image() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const [error, setError] = useState("");
 
-  const modelUrl: any = {
+  const modelUrl: typ = {
     value: "black-forest-labs/FLUX.1-schnell",
     label:
       "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",

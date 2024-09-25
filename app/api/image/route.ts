@@ -55,8 +55,7 @@ export async function POST(req: Request) {
       },
       timeoutDuration
     );
-    console.log(process.env.hf_key)
-
+    console.log(process.env.hf_key);
 
     if (!response.ok) {
       const errorDetails: ErrorResponse = await response.json();
@@ -65,12 +64,10 @@ export async function POST(req: Request) {
         errorDetails
       );
 
-
       return new NextResponse("Error generating image", {
         status: response.status,
       });
     }
-    
 
     const blob = await response.blob();
     const arrayBuffer = await blob.arrayBuffer();
@@ -88,11 +85,11 @@ export async function POST(req: Request) {
         },
       }
     );
-  } catch (e: any) {
+  } catch (error) {
     console.error("Image generation error:");
 
-    return new NextResponse( e.message , { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 }
 
-// 
+//

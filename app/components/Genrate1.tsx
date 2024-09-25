@@ -3,22 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 // Custom Button component
-const CustomButton = ({
-  onClick,
-  children,
-}: {
-  onClick: () => void;
-  children: React.ReactNode;
-}) => (
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={onClick}
-    className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300"
-  >
-    {children}
-  </motion.button>
-);
+
 
 // Custom Card component
 const CustomCard = ({ children }: { children: React.ReactNode }) => (

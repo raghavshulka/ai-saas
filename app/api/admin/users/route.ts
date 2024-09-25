@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/app/lib/prisma';
+import { NextResponse } from "next/server";
+import prisma from "@/app/lib/prisma";
 
 export async function GET() {
   try {
@@ -12,12 +12,11 @@ export async function GET() {
       where: { subscriptionId: null },
     });
 
-    return NextResponse.json({ 
-      usersWithSubscription, 
-      usersWithoutSubscription 
+    return NextResponse.json({
+      usersWithSubscription,
+      usersWithoutSubscription,
     });
-
   } catch (error) {
-    return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 }

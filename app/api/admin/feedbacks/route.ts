@@ -1,9 +1,9 @@
 // app/api/admin/feedbacks/route.ts
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import prisma from '@/app/lib/prisma'; // Prisma client
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const feedbacks = await prisma.feedback.findMany({
       include: {
