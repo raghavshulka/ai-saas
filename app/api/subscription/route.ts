@@ -7,7 +7,7 @@ interface DecodedToken {
   [key: string]: any; // Adjust based on what your token contains
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
     return new NextResponse(JSON.stringify({ message: 'Method Not Allowed' }), { status: 405 });
   }
