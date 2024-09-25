@@ -1,7 +1,7 @@
 // pages/index.tsx
 "use client";
+import { NextResponse } from "next/server";
 import { useState } from "react";
-import { string } from "zod";
 
 interface typ {
   value: string;
@@ -43,6 +43,7 @@ export default function Image() {
       }
     } catch (err) {
       setError("Something went wrong");
+      NextResponse.json(err);
     }
 
     setLoading(false);
