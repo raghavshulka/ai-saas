@@ -1,7 +1,8 @@
+// Generate2.tsx
 export default function AIImageGeneratorLanding() {
   function Cmp({ style }: { style: string }) {
     return (
-      <div className="min-h-screen bg-[#0d0d23] text-white flex items-center justify-center p-4 md:p-8 lg:p-12">
+      <div className="min-h-screen text-white flex items-center justify-center p-4 md:p-8 lg:p-12">
         <div
           className={`max-w-7xl mx-auto flex flex-col items-center justify-between lg:flex-row lg:${style}`}
         >
@@ -13,7 +14,7 @@ export default function AIImageGeneratorLanding() {
             <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold mb-6">
               AI Image Generator Magic!
             </h2>
-            <p className="text-gray-300 mb-8 text-sm">
+            <p className="text-gray-300 mb-8 text-sm md:text-base lg:text-base">
               Elevate your creations with the revolutionary Text to Image AI
               generator, revolutionizing the way you convert simple text into
               visually captivating artwork. Unleash your imagination and craft

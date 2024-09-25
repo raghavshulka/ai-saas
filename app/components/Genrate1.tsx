@@ -1,3 +1,4 @@
+// Generate1.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -35,7 +36,6 @@ const sampleImages = [
   "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60",
   "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60",
   "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60",
-
 ];
 
 export default function Generate1() {
@@ -44,8 +44,7 @@ export default function Generate1() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0d0d23] text-white p-4 md:p-8">
-
+    <div className="min-h-screen text-white p-4 md:p-8 lg:p-12">
       <header className="mb-8 flex flex-col w-full justify-center items-center text-center">
         <h1 className="text-3xl font-bold">
           <span className="text-purple-500">Generate AI Photos</span>

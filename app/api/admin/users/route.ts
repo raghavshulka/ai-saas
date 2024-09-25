@@ -12,9 +12,6 @@ export async function GET() {
       where: { subscriptionId: null },
     });
 
-    console.log('Users with subscription:', usersWithSubscription);
-    console.log('Users without subscription:', usersWithoutSubscription);
-
     return NextResponse.json({ 
       usersWithSubscription, 
       usersWithoutSubscription 

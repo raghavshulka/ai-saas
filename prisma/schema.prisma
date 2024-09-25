@@ -29,7 +29,7 @@ model Subscription {
   credits Int
   price   Float
   limit   Int
-  users User[]
+  users   User[]
 }
 
 model Feedback {
