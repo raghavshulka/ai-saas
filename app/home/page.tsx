@@ -14,7 +14,7 @@ const Home = () => {
         <Generate1 />
         <Generate2 />
         <ImageGallery />
-        <PricingComponent />
+        <PricingComponent id="pricing"/>
       </div>
     </div>
   )
