@@ -30,7 +30,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Loader2, Users, CreditCard, DollarSign } from "lucide-react";
@@ -116,21 +115,8 @@ export const AdminDashboard = () => {
   }
 
   return (
-    <div className="flex h-screen bg-background">
-      <aside className="w-64 bg-muted p-4">
-        <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
-        <nav>
-          <Button variant="ghost" className="w-full justify-start mb-2">
-            <Users className="mr-2 h-4 w-4" /> Users
-          </Button>
-          <Button variant="ghost" className="w-full justify-start mb-2">
-            <CreditCard className="mr-2 h-4 w-4" /> Subscriptions
-          </Button>
-          <Button variant="ghost" className="w-full justify-start">
-            <DollarSign className="mr-2 h-4 w-4" /> Revenue
-          </Button>
-        </nav>
-      </aside>
+    <div className="flex h-screen bg-black/90 text-white ">
+    
       <main className="flex-1 p-8 overflow-auto">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
