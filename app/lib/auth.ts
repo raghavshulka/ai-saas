@@ -3,7 +3,17 @@ import GoogleProvider from 'next-auth/providers/google';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import prisma from './prisma';
-import { getSession } from 'next-auth/react';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;  // Add the id field here
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
