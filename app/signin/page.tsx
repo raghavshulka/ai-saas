@@ -1,8 +1,19 @@
 'use client'
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function Component() {
+export default function SignInComponent() {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      // Redirect to the pricing section after sign-in
+      router.push('/home#pricing');
+    }
+  }, [session, router]);
+
   if (session) {
     return (
       <>
@@ -11,6 +22,7 @@ export default function Component() {
       </>
     );
   }
+
   return (
     <>
       {/* Not signed in <br /> */}

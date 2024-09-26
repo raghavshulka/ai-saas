@@ -7,11 +7,13 @@ import {
   animate,
 } from "framer-motion";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
 export const Header = () => {
   const color = useMotionValue(COLORS_TOP[0]);
+  const router = useRouter();
 
   useEffect(() => {
     animate(color, COLORS_TOP, {
@@ -50,6 +52,7 @@ export const Header = () => {
             border,
             boxShadow,
           }}
+          onClick={() => router.push("/signin")}
           whileHover={{
             scale: 1.05,
           }}

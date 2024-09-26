@@ -1,5 +1,10 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
+import { useRouter } from 'next/navigation';
+
+type PricingComponentProps = {
+  id?: string;  // Define id as an optional string prop
+};
 
 const pricingPlans = [
   {
@@ -19,13 +24,14 @@ const pricingPlans = [
   },
 ];
 
-const PricingComponent = () => {
+const PricingComponent: FC<PricingComponentProps> = ({id}) => {
+  const router = useRouter();
   const [isYearly, setIsYearly] = useState(false);
 
   const toggleSwitch = () => setIsYearly(!isYearly);
 
   return (
-    <div className="flex items-center w-full h-full justify-center p-4 md:p-8 lg:p-12">
+    <div id={id} className="flex items-center w-full h-full justify-center p-4 md:p-8 lg:p-12">
       <div className="p-6 rounded-lg shadow-lg w-full md:max-w-2xl lg:max-w-4xl">
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Pricing Plans
@@ -58,7 +64,7 @@ const PricingComponent = () => {
                   </li>
                 ))}
               </ul>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+              <button onClick={() => router.push("/imagegeneration")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
                 Select Plan
               </button>
             </div>
