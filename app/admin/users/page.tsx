@@ -1,4 +1,5 @@
 // app/admin/users/page.tsx
+"use client"
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AdminDashboard } from '@/components/admin-dash';
