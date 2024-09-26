@@ -2,6 +2,8 @@ import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import prisma from './prisma';
+import { getSession } from 'next-auth/react';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
@@ -25,6 +27,16 @@ export const verifyToken = (token: string): JwtPayload | null => {
   } catch {
     return null;
   }
+};
+
+export const isAdmin = async (session: any) => {
+  if (!session || !session.user) return false;
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+  });
+
+  return user?.role === 'ADMIN';
 };
 
 export const NEXT_AUTH_CONFIG: NextAuthOptions = {
