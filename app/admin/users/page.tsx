@@ -1,7 +1,7 @@
 // app/admin/users/page.tsx
 "use client"
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { AdminDashboard } from '@/components/admin-dash';
 import { getSession } from 'next-auth/react'; // Ensure you're using the correct import
 import { isAdmin } from '@/app/lib/auth'; // Import the updated isAdmin function
@@ -17,7 +17,7 @@ const AdminPage = () => {
       const result = await isAdmin(session); // Pass the session to isAdmin
 
       if (!result) {
-        router.push('/'); // Redirect non-admin users to the home page
+        router?.push('/'); // Redirect non-admin users to the home page
       } else {
         setIsAuthorized(true);
       }
