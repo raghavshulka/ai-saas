@@ -312,8 +312,7 @@ export function ImageGenerationDashboard() {
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ImageIcon className="h-16 w-16 text-gray-600 mb-4" />
                   <p className="text-gray-400">
-                    No images generated yet. Enter a prompt and click "Generate
-                    Image" to start.
+                    No images generated yet. Enter a prompt and click Generate <br/> Image to start.
                   </p>
                 </div>
               )}
