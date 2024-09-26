@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.subscription.createMany({
     data: [
-      { name: 'Free', credits: 0, price: 0.0, limit: 10 },
+      { name: 'Free', credits: 10, price: 0.0, limit: 10 },
       { name: 'Basic', credits: 100, price: 9.99, limit: 50 },
       { name: 'Premium', credits: 500, price: 19.99, limit: 100 }
     ]

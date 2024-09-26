@@ -1,5 +1,11 @@
 // Generate2.tsx
+"use client"
+import { useRouter } from "next/navigation";
+
 export default function AIImageGeneratorLanding() {
+
+  const router = useRouter();
+
   function Cmp({ style }: { style: string }) {
     return (
       <div className="min-h-screen text-white flex items-center justify-center p-4 md:p-8 lg:p-12">
@@ -21,7 +27,7 @@ export default function AIImageGeneratorLanding() {
               breathtaking, AI-generated masterpieces that are bound to
               captivate and inspire your audience.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button type="button" onClick={() => router.push("/signin")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Test Image Generator
             </button>
           </div>
