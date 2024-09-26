@@ -11,8 +11,19 @@ declare module 'next-auth' {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      role?: string; // Optionally add the role field
     };
   }
+}
+
+// Define the expected session structure
+interface SessionType {
+  user: {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
 }
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
@@ -39,7 +50,8 @@ export const verifyToken = (token: string): JwtPayload | null => {
   }
 };
 
-export const isAdmin = async (session: any) => {
+// Update isAdmin to use the defined SessionType
+export const isAdmin = async (session: SessionType | null) => {
   if (!session || !session.user) return false;
 
   const user = await prisma.user.findUnique({
