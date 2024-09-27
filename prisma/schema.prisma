@@ -13,6 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id           String       @id @default(uuid()) @map("_id")
   credits      Int          @default(0)
@@ -21,6 +26,8 @@ model User {
   subscription Subscription?  @relation(fields: [subscriptionId], references: [id])
   subscriptionId String?       // Foreign key reference to the Subscription model
   feedbacks      Feedback[]    // One-to-many relation to Feedback model
+  role           Role         @default(USER)   // Role for each user with default as USER
+  email         String       @unique          // User email
 }
 
 model Subscription {

@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -9,7 +10,6 @@ export default function SignInComponent() {
 
   useEffect(() => {
     if (session) {
-      // Redirect to the pricing section after sign-in
       router.push('/home#pricing');
     }
   }, [session, router]);
@@ -17,7 +17,6 @@ export default function SignInComponent() {
   if (session) {
     return (
       <>
-        {/* Signed in as {session?.user?.email} <br /> */}
         <button onClick={() => signOut()}>Sign out</button>
       </>
     );
@@ -25,8 +24,7 @@ export default function SignInComponent() {
 
   return (
     <>
-      {/* Not signed in <br /> */}
-      <button onClick={() => signIn()}>Sign in</button>
+      <button onClick={() => signIn('google')}>Sign in with Google</button>
     </>
   );
 }
