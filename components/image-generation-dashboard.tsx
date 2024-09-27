@@ -12,7 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
 import { ScrollArea } from "../components/ui/scroll-area";
 import {
   Loader2,
@@ -29,15 +34,15 @@ interface GeneratedImage {
 }
 
 const models = [
-  { value: "flux", label: "FLUX.1-schnell" },
-  { value: "stable-diffusion", label: "Stable Diffusion" },
-  { value: "dall-e", label: "DALL-E" },
+  { value: "flux-schnell", label: "flux-schnell" },
+  { value: "Stable-diffusion-3-M", label: "Stable-diffusion-3-M" },
+  { value: "RealV-Mk-1", label: "RealV-Mk-1" },
 ];
 
 export function ImageGenerationDashboard() {
   const [prompt, setPrompt] = useState("");
   const [negativePrompt, setNegativePrompt] = useState("Don't put hands");
-  const [model, setModel] = useState("flux");
+  const [model, setModel] = useState("flux-schnell");
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<GeneratedImage[]>([]);
   const [error, setError] = useState("");
@@ -47,11 +52,11 @@ export function ImageGenerationDashboard() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    const modelUrl = {
-      "flux-schnell": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
-      "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
-      "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
-  }
+    //   const modelUrl = {
+    //     "flux-schnell": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
+    //     "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
+    //     "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+    // }
 
     try {
       const response = await fetch("/api/image", {
@@ -59,7 +64,7 @@ export function ImageGenerationDashboard() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt, models: modelUrl }),
+        body: JSON.stringify({ prompt, models: model }),
       });
 
       if (!response.ok) {
@@ -315,7 +320,8 @@ export function ImageGenerationDashboard() {
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ImageIcon className="h-16 w-16 text-gray-600 mb-4" />
                   <p className="text-gray-400">
-                    No images generated yet. Enter a prompt and click Generate <br/> Image to start.
+                    No images generated yet. Enter a prompt and click Generate{" "}
+                    <br /> Image to start.
                   </p>
                 </div>
               )}
