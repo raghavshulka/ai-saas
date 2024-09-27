@@ -51,15 +51,13 @@ export const verifyToken = (token: string): JwtPayload | null => {
 };
 
 // Update isAdmin to use the defined SessionType
-export const isAdmin = async (session: SessionType | null) => {
-  if (!session || !session.user) return false;
-
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
-  });
-
-  return user?.role === 'ADMIN';
+export const isAdmin = async () => {
+  const response = await fetch('/api/check-admin');
+  const data = await response.json();
+  
+  return data.isAdmin;
 };
+
 
 export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
@@ -70,25 +68,32 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({ user }) {
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email || '' },
+      });
+
+      if (!existingUser) {
+        await prisma.user.create({
+          data: {
+            email: user.email || '',
+            role: 'USER',
+          },
+        });
+      }
+      return true;
+    },
     jwt: async ({ user, token }) => {
       if (user) {
-        return {
-          ...token,
-          uid: user.id,
-        };
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email || '' },
+        });
+        token.uid = existingUser?.id || token.uid;
       }
       return token;
     },
     session: async ({ session, token }) => {
-      if (session.user) {
-        return {
-          ...session,
-          user: {
-            ...session.user,
-            id: token.uid,
-          },
-        };
-      }
+      session.user.id = token.uid as string;
       return session;
     },
   },

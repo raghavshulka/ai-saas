@@ -27,6 +27,7 @@ model User {
   subscriptionId String?       // Foreign key reference to the Subscription model
   feedbacks      Feedback[]    // One-to-many relation to Feedback model
   role           Role         @default(USER)   // Role for each user with default as USER
+  email         String       @unique          // User email
 }
 
 model Subscription {
