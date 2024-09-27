@@ -16,16 +16,6 @@ declare module 'next-auth' {
   }
 }
 
-// Define the expected session structure
-interface SessionType {
-  user: {
-    id: string;
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  };
-}
-
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 
 export const hashPassword = async (password: string) => {
