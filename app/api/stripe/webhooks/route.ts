@@ -21,9 +21,9 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       sig!,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (err: any) {
-    console.error('⚠️  Webhook signature verification failed.', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+  } catch (err: unknown) {
+    console.error('⚠️  Webhook signature verification failed.', err instanceof Error ? err.message : 'Unknown error');
+    return res.status(400).send(`Webhook Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
   }
 
   // Handle the event based on its type
