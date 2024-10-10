@@ -3,7 +3,6 @@ import CustomSlider from "../components/CustomSlider"
 import Generate1 from "../components/Genrate1"
 import Generate2 from "../components/Genrate2"
 import ImageGallery from "../components/ImageGrid"
-import PricingComponent from "../components/Pricing"
 
 const Home = () => {
   return (
@@ -14,7 +13,6 @@ const Home = () => {
         <Generate1 />
         <Generate2 />
         <ImageGallery />
-        <PricingComponent id="pricing"/>
       </div>
     </div>
   )

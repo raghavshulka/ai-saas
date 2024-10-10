@@ -9,7 +9,7 @@ export default function SignInComponent() {
 
   useEffect(() => {
     if (session) {
-      router.push('/home#pricing');
+      router.push('');
     }
   }, [session, router]);
 
