@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export const runtime = 'nodejs';
 
-const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const buf = await buffer(req);
   const sig = req.headers['stripe-signature'];
 
@@ -91,5 +91,3 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Return a response to acknowledge receipt of the event
   res.json({ received: true });
 };
-
-export default webhookHandler;
