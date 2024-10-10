@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { buffer } from 'micro';
 import Stripe from 'stripe';
-import prisma from '@/app/lib/prisma';
+import prisma from '@/lib/prisma';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-09-30.acacia',

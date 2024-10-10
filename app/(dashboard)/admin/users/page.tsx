@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AdminDashboard } from '@/components/admin-dash';
-import { isAdmin } from '@/app/lib/auth';
+import { isAdmin } from '@/lib/auth';
 
 const AdminPage = () => {
   const [loading, setLoading] = useState(true);
