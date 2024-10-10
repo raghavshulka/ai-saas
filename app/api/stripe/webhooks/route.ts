@@ -1,5 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { buffer } from 'micro';
+import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import prisma from '@/lib/prisma';
 
@@ -9,21 +8,22 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export const runtime = 'nodejs';
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const buf = await buffer(req);
-  const sig = req.headers['stripe-signature'];
+export async function POST(req: NextRequest) {
+  const buf = await req.arrayBuffer(); // Read the body as ArrayBuffer
+  const buffer = Buffer.from(buf);
+  const sig = req.headers.get('stripe-signature'); // Use get method to access headers
 
   let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(
-      buf,
+      buffer,
       sig!,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (err: unknown) {
     console.error('⚠️  Webhook signature verification failed.', err instanceof Error ? err.message : 'Unknown error');
-    return res.status(400).send(`Webhook Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    return NextResponse.json({ error: `Webhook Error: ${err instanceof Error ? err.message : 'Unknown error'}` }, { status: 400 });
   }
 
   // Handle the event based on its type
@@ -38,7 +38,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
         if (customerResponse.deleted) {
           // Handle the case where the customer is deleted
           console.error('Customer was deleted.');
-          return res.status(400).send('Customer was deleted.');
+          return NextResponse.json({ error: 'Customer was deleted.' }, { status: 400 });
         }
 
         // Now that we know the customer is not deleted, we can safely cast to Stripe.Customer
@@ -89,5 +89,5 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 
   // Return a response to acknowledge receipt of the event
-  res.json({ received: true });
+  return NextResponse.json({ received: true });
 };
