@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import { getServerSession } from "next-auth";
-import NEXT_AUTH_CONFIG from "@/app/lib/auth";
+import NEXT_AUTH_CONFIG from "@/lib/auth";
 // Configuration
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
