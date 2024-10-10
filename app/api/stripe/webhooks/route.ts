@@ -7,11 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-09-30.acacia',
 });
 
-export const config = {
-  api: {
-    bodyParser: false, // Stripe requires the raw body to construct the event
-  },
-};
+export const runtime = 'edge';
 
 const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const buf = await buffer(req);
