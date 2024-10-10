@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-09-30.acacia',
 });
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const buf = await buffer(req);
