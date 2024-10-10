@@ -1,4 +1,4 @@
-import {ImageGenerationDashboard} from "../../components/image-generation-dashboard";
+import {ImageGenerationDashboard} from "@/components/image-generation-dashboard";
 
 import React from "react";
 

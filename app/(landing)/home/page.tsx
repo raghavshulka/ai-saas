@@ -1,8 +1,8 @@
-import { Header } from "../../components/Header"
-import CustomSlider from "../../components/CustomSlider"
-import Generate1 from "../../components/Genrate1"
-import Generate2 from "../../components/Genrate2"
-import ImageGallery from "../../components/ImageGrid"
+import { Header } from "@/components/Header"
+import CustomSlider from "@/components/CustomSlider"
+import Generate1 from "@/components/Genrate1"
+import Generate2 from "@/components/Genrate2"
+import ImageGallery from "@/components/ImageGrid"
 
 const Home = () => {
   return (
