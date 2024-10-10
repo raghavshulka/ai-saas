@@ -3,20 +3,20 @@ import prisma from "@/app/lib/prisma";
 
 export async function GET() {
   try {
-    const usersWithSubscription = await prisma.user.findMany({
-      where: { subscriptionId: { not: null } },
-      include: { subscription: true },
-    });
-
-    const usersWithoutSubscription = await prisma.user.findMany({
-      where: { subscriptionId: null },
+    // Fetch all users with their credits
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        credits: true,
+        // No need to include subscription details as per your requirements
+      },
     });
 
     return NextResponse.json({
-      usersWithSubscription,
-      usersWithoutSubscription,
+      users,
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("Error fetching users:", error);
+    return NextResponse.json({ error: "Failed to fetch users." }, { status: 500 });
   }
 }

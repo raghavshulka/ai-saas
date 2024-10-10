@@ -68,6 +68,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
           data: {
             email: user.email || '',
             role: 'USER',
+            credits: 10,
           },
         });
       }
