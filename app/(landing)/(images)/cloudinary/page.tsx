@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Upload, Image as ImageIcon, Wand2 } from "lucide-react"
+import { Upload, Image as ImageIcon } from "lucide-react"
 import { SocialFormat, Feature, socialFormats, features } from "./imagcomp"
 
 export default function ImageEditor() {
