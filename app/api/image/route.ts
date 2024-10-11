@@ -27,8 +27,7 @@ function fetchWithTimeout(
 
 const modelUrls: { [key: string]: string } = {
   "flux-schnell": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
-  "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
-  "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
+  "flux-dev": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
 };
 
 export async function POST(req: Request) {
