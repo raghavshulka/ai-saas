@@ -35,8 +35,7 @@ interface GeneratedImage {
 
 const models = [
   { value: "flux-schnell", label: "flux-schnell" },
-  { value: "Stable-diffusion-3-M", label: "Stable-diffusion-3-M" },
-  { value: "RealV-Mk-1", label: "RealV-Mk-1" },
+  { value: "flux-dev", label: "flux-dev" },
 ];
 
 export function ImageGenerationDashboard() {
@@ -52,11 +51,6 @@ export function ImageGenerationDashboard() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    //   const modelUrl = {
-    //     "flux-schnell": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell",
-    //     "Stable-diffusion-3-M": "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3-medium-diffusers",
-    //     "RealV-Mk-1": "https://api-inference.huggingface.co/models/SG161222/RealVisXL_V4.0",
-    // }
 
     try {
       const response = await fetch("/api/image", {
