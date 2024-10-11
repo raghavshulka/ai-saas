@@ -1,10 +1,11 @@
 "use client";
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import Loader from '@/components/ui/loader';
 
-const Checkout = () => {
+const CheckoutContent = () => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const plan = searchParams.get('plan');
@@ -21,7 +22,6 @@ const Checkout = () => {
       });
 
       if (!res.ok) {
-        // Log the error response for debugging
         const errorMessage = await res.text();
         console.error('Error response:', errorMessage);
         throw new Error('Failed to create checkout session');
@@ -33,7 +33,7 @@ const Checkout = () => {
       console.error('Checkout error:', error);
       alert('An error occurred while processing your request. Please try again later.');
     } finally {
-      setLoading(false); // Stop loading regardless of success or failure
+      setLoading(false);
     }
   };
 
@@ -49,6 +49,14 @@ const Checkout = () => {
         Proceed to Checkout
       </button>
     </div>
+  );
+};
+
+const Checkout = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <CheckoutContent />
+    </Suspense>
   );
 };
 
